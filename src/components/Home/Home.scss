@@ -1,0 +1,106 @@
+@import "../../variables";
+@import "animate.css";
+
+.rowHolder{
+    animation: fadeIn 2s;
+    .myInfo {
+        flex: 3;
+        .hero {
+            animation: fadeIn 2s;
+            .btn {
+                border-color: $secondary-color;
+                color:$btn-color;
+                &:hover{
+                    color:$btn-color
+                };
+            };
+    
+        // -------Styles for medium screens-------
+        @media (max-width: 991px) {
+            margin-top:40px ;
+        };
+        @media (max-width: 768px) {
+            padding: 2rem;
+            text-align: center;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        };
+        
+        @media (max-width: 576px) {
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        };
+
+        //--------styles for thin fold mobiles---------
+        @media (max-width: 356px) {
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 50px;
+            h2 {
+                font-size: 2em;
+            }
+        };
+
+        // ----------Styles for large screens----------
+        @media (min-width: 768px) {
+            text-align: left;
+            font-size: 1.2rem;
+        };
+        
+    };
+    };
+@media (max-width: 991px) {
+        margin-top:40px ;
+        min-height: 100vh;
+        align-content: flex-end !important;
+    };
+}
+.imgHolder {
+    .personalImg {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        filter: brightness(105%) contrast(105%) saturate(130%);
+        img {
+            border: 6px solid $primary-color;
+            border-radius: 105px 0px 100px 0px;
+        }
+        @media(max-width:991px) {
+            height: 6%;
+            margin: auto 0;
+        };
+        @media(min-width:1200px) {
+            width: 85%;
+            margin: 0 auto;
+        };
+    };
+};
+
+// -----------style wavy background for body-------------
+.custom-shape-divider-bottom-1678488528 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+};
+
+.custom-shape-divider-bottom-1678488528 svg {
+    position: relative;
+    display: block;
+    width: calc(127% + 1.3px);
+    height: 150px;
+
+};
+
+.custom-shape-divider-bottom-1678488528 .shape-fill {
+    fill: #fff
+};

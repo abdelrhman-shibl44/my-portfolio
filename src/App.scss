@@ -1,0 +1,109 @@
+/** @format */
+
+@import "./variables";
+@import "animate.css";
+
+.App {
+  margin-left: 145px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.fade-in {
+	opacity: 0;
+	animation: fade-in 1s ease-in forwards;
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.fade-enter {
+	opacity: 0;
+}
+
+.fade-enter-active {
+	opacity: 1;
+	transition: opacity 300ms ease-in-out;
+}
+
+.fade-exit {
+	opacity: 1;
+}
+
+.fade-exit-active {
+	opacity: 0;
+	transition: opacity 300ms ease-in-out;
+}
+// default style for headers, paragraph and links
+body {
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 18px;
+	line-height: 1.5;
+	position: relative;
+	background-color: #1b3a5f !important;
+
+	@keyframes glow {
+		0% {
+			text-shadow: 0 0 10px rgba(220, 2, 240, 0.8);
+		}
+
+		50% {
+			text-shadow: 0 0 20px rgba(220, 2, 240, 0.8);
+		}
+
+		100% {
+			text-shadow: 0 0 10px rgba(220, 2, 240, 0.8);
+		}
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: 36px;
+		margin-bottom: 30px;
+		letter-spacing: 0.05em;
+		animation: glow 2s infinite;
+	}
+
+	p {
+		color: $secondary-color;
+		text-align: justify;
+		text-indent: 2em;
+		word-spacing: -0.1em;
+		letter-spacing: 0.02em;
+		min-width: 300px;
+		margin-bottom: 20px;
+		line-height: 1.7;
+		font-family: cursive;
+		color: #fffdd0;
+
+		@media (max-width: 350px) {
+			min-width: 250px;
+		}
+
+		@media only screen and (min-width: 768px) and (max-width: 991px) {
+			padding-right: 15px;
+		}
+	}
+	a {
+		text-decoration: none !important;
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			text-decoration: underline;
+			transform: scale(1.05);
+		}
+	}
+}

@@ -1,0 +1,60 @@
+/** @format */
+
+//--- animate the letters ----
+.text-animate {
+	display: inline-block;
+	opacity: 0;
+	animation: bounceIn 1s 1s;
+	animation-fill-mode: forwards;
+	min-width: 10px;
+}
+
+.text-animate-hover {
+	min-width: 10px;
+	padding: 1px 0;
+	display: inline-block;
+	animation-fill-mode: both;
+	animation: bounce-letters 1s ease-in-out;
+
+	&:hover {
+		animation: rubberBand 0.7s ease both;
+		color: #fff;
+	}
+}
+
+@for $i from 1 through 37 {
+	.text-animate._#{$i} {
+		animation-delay: #{$i / 10}s;
+	}
+}
+
+@keyframes bounce-letters {
+	0% {
+		transform: translateY(0);
+	}
+
+	15% {
+		transform: translateY(-10px) rotate(-5deg);
+	}
+
+	30% {
+		transform: translateY(0) rotate(0deg);
+	}
+
+	45% {
+		transform: translateY(-5px) rotate(5deg);
+	}
+
+	60% {
+		transform: translateY(0) rotate(0deg);
+	}
+
+	75% {
+		transform: translateY(-2px) rotate(-2deg);
+	}
+
+	100% {
+		transform: translateY(0) rotate(0deg);
+	}
+}
+//--- end animate the letters ---
