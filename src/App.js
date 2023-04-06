@@ -6,15 +6,12 @@ import { Home } from "./components/Home/Home";
 import { Projects } from './components/Projects/Projects';
 import { Skills } from './components/Skills/Skills';
 import { Contact } from './components/Contact/Contact';
-import { Col } from 'react-bootstrap';
 
 function App() {
   const location = useLocation();
   return (
     <div className="App">
-      <Col xs={12} md={5}>
-        <Sidebar />
-      </Col>
+      <Sidebar />
       {/* end the animation after exit */}
       <AnimatePresence mode='wait'>
         <motion.div key={location.pathname}

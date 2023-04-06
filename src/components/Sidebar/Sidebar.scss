@@ -1,0 +1,43 @@
+@import "/src/variables";
+@import url("https://fonts.googleapis.com/css?family=Bebas Neue:400,700&display=swap");
+$sidebar-width: 145px;
+
+.sidebar {
+  transition: 1s ease;
+  .logo {
+    cursor: pointer;
+  }
+  background-color: $primary-color;
+  filter: contrast(1.5);
+  color: $light-color;
+  height: 100%;
+  left: 0;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  transition: 0.5s ease-in-out;
+  width: $sidebar-width;
+  z-index: 999;
+  .nav-link {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    &:hover {
+      color: $secondary-color;
+      background-color: lighten($primary-color, 20%);
+    }
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+    background-color: #7b97ffdb;
+    &.open {
+			transition: 1s ease;
+			margin-left: 0;
+			width: 100%;
+		}
+
+		&.close {
+			margin-left: -100%;
+		}
+  }
+}

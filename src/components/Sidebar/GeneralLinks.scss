@@ -1,0 +1,34 @@
+@import"/src/variables";
+
+.general__Links{
+    align-items: center;
+    justify-content:center;
+    .link {
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        margin: 0 20px;
+        color: #bdc3c7;
+        font-size: 1.2rem;
+        transition: all 0.3s ease-in-out;
+        
+        .text {
+            display: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+            color: #8e44ad;
+
+            .text {
+                opacity: 1;
+                display: block;
+            }
+            svg{
+                display: none;
+                opacity: 0;
+            }
+        }
+    }
+
+}
