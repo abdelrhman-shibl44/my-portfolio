@@ -1,4 +1,4 @@
-// the main Holder of projects
+//------- the main Holder of projects--------
 .projectsHolder {
   position: relative;
   display: flex;
@@ -9,7 +9,7 @@
   min-height: 100vh;
   padding: 50px 0;
 
-  // Header sections contains ProjectsType buttons
+  //------- Header sections contains ProjectsType buttons--------
   .header-section {
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@
     column-gap: 10px;
     padding: 30px 0;
 
-    // The buttons
+    //------- The buttons--------
     button {
       width: 80px;
       height: 80px;
@@ -36,12 +36,12 @@
       text-align: center;
       padding: 25px;
 
-      // When button have active class 
+      //------- When button have active class --------
       &.active {
         background-image: radial-gradient(circle at center, transparent, purple 100%);
       }
 
-      // When hover on button make animation
+      //------- When hover on button make animation--------
       &:hover {
         animation: fan 0.2s forwards;
 
@@ -63,7 +63,7 @@
       }
     }
 
-    // responsive buttons
+    //------- responsive buttons--------
     @media (max-width: 768px) {
       button {
         width: 72px;
@@ -72,7 +72,7 @@
     }
   }
 
-  // start Content that contains cards
+  //------- start Content that contains cards--------
   .content-section {
     display: flex;
     justify-content: center;
@@ -83,7 +83,7 @@
   }
 }
 
-// start card holder
+//------- start card holder--------
 .cardHolder {
   position: relative;
   display: flex;
@@ -91,7 +91,7 @@
   height: 380px;
   background: none;
 
-  // style the card 
+  //------- style the card --------
   .card__content {
     padding: 10px;
     width: 400px;
@@ -107,7 +107,7 @@
     overflow-y: auto;
     overflow-x: hidden;
 
-    // style scrollbar for the card
+    //------- style scrollbar for the card--------
     &::-webkit-scrollbar {
       width: 10px;
     }
@@ -143,7 +143,7 @@
       text-decoration: none;
       transition: background-color 0.3s ease-out, color 0.3s ease-out;
 
-      // when hover on Link button 
+      //------- when hover on Link button --------
       &:hover {
         text-shadow: 0 0 50px purple;
         color: purple;
@@ -163,7 +163,7 @@
         max-width: 100%;
       }
 
-      // style scroll of image
+      //------- style scroll of image--------
       &::-webkit-scrollbar {
         width: 2px;
         border-radius: 50px;
@@ -177,7 +177,7 @@
     }
   }
 
-  // responsive the main Holder
+  //------- responsive the main Holder--------
   @media (max-width: 768px) {
     width: 350px;
     height: 330px;
@@ -193,3 +193,5 @@
     height: 250px;
   }
 }
+
+//---- happy coding -------
