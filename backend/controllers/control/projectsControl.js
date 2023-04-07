@@ -57,3 +57,16 @@ exports.add = (req, res) => {
       });
   });
 };
+//-------- edit current project -------
+exports.edit = (req, res) => {
+  pool.getConnection((error, connection) => {
+      if (error) throw error
+      console.log(`connected to database ${connection.threadId}`)
+      const sql = 'SELECT * FROM projects WHERE id = ?'
+      connection.query(sql, [req.params.id], (err, rows) => {
+          res.render('editProject', { rows });
+          console.log('hi im from rows /n' + [...rows])
+      })
+  })
+};
+//-------- end edit current project -------
