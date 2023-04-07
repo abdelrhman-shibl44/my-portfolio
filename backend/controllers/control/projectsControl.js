@@ -30,3 +30,30 @@ exports.home = (req, res) => {
 exports.form = (req,res) => {
   res.render("addProject")
 }
+
+//--------- addNew Project to database----------
+exports.add = (req, res) => {
+  let { type, name, link,sort_order, description } = req.body
+  console.log(type, name, link, description,sort_order)
+  type = type.trim();
+  name = name.trim();
+  link = link.trim();
+  description = description.trim();
+  // let imagePath = null;
+  // if (req.file) {
+  //     imagePath = req.file.destination.replace("../public", "") + '/' + req.file.filename;
+  // }
+  pool.getConnection((err, connection) => {
+      if (err) throw err;
+      console.log("connected database" + connection.threadId);
+      const sql = "INSERT INTO projects SET type = ?, name = ?, link = ?, sort_order = ?, description = ?";
+      connection.query(sql, [type, name, link, sort_order, description], (err, result) => {
+          connection.release();
+          if (!err) {
+              res.render("addProject", { alert: `project ${name} successfuly added` });
+          } else {
+              res.send("Error when adding project");
+          };
+      });
+  });
+};
