@@ -8,7 +8,7 @@ const app = express();
 //------ require("./db_services")--------
 require("./db_services");
 //------get port from env or take 5050
-const port = process.env.PORT | 5050;
+const port = process.env.PORT || 6000;
 require("dotenv").config();
 //-------middleWars--------
 app.use(cors());
@@ -21,5 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const hbs = exhbs.create({ extname: ".hbs" });
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
+// use router 
+app.use("/", require("./controllers/routes/projects"));
 // -----listen to port-------
 app.listen(port, () => console.log(`port listening on ${process.env.port}`));
