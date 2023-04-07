@@ -70,3 +70,43 @@ exports.edit = (req, res) => {
   })
 };
 //-------- end edit current project -------
+//-------- add project to database -------
+exports.update = (req, res) => {
+  let { type, name, link,sort_order, description } = req.body
+  console.log(type, name, link, description,sort_order)
+  type = type.trim();
+  name = name.trim();
+  link = link.trim();
+  description = description.trim();
+  // let imagePath = null;
+  // if (req.file) {
+  //     imagePath = req.file.destination.replace("../public", "") + '/' + req.file.filename;
+  // }
+  pool.getConnection((err, connection) => {
+      if (err) throw err;
+      console.log("connected database" + connection.threadId);
+      const sql = "UPDATE projects SET type = ?, name = ?, link = ?, sort_order = ?, description = ? WHERE id = ?";
+      connection.query(sql, [type, name, link, sort_order, description, req.params.id], (err, result) => {
+          connection.release();
+          if (!err) {
+              pool.getConnection((error, connection) => {
+                if(error) throw error
+                console.log(`connected to database${connection.threadId}`)
+                const sql = `SELECT * FROM projects WHERE id = ?`
+                connection.query(sql , [req.params.id],(err,rows)=>{
+                  connection.release();
+                  if(!err) {
+                    res.render("editProject", {rows , alert: `project ${name} successfuly updated` })
+                  }else{
+                    console.log(err)
+                  }
+                  console.log(`hello from rows /n ` + rows)
+                })
+              })
+          } else {
+              res.send("Error when adding project");
+          };
+      });
+  });
+};
+//-------- end adding project to database -------

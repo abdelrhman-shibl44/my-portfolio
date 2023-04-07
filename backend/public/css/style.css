@@ -132,21 +132,15 @@ table tbody tr td td {
 
 /* fold mobile responsive */
 @media(max-width:280px) {
-  h2{
+  h2 {
     font-size: 25px;
   }
-  .container{
-  padding:0;
+
+  .container {
+    padding: 0;
+  }
+
+  .title {
+    font-size: 14px
+  }
 }
-.title{
-  font-size: 14px
-}
-  /* .addBtn{
-    font-size: 14px !important;
-  }; */
-};
-  /*
-  .buttonHold{
-    width: 80px;
-  };  */
-/* end fold mobile responsive */
