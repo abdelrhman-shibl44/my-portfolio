@@ -26,3 +26,7 @@ exports.home = (req, res) => {
     });
   });
 }
+// render addProjectForm 
+exports.form = (req,res) => {
+  res.render("addProject")
+}
