@@ -5,5 +5,6 @@ const controll = require('../control/projectsControl')
 router.get("/main", controll.home)
 router.get("/form", controll.form)
 router.post("/form", controll.add)
+router.get("/editProject/:id", controll.edit)
 
 module.exports = router
