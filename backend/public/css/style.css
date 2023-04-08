@@ -122,6 +122,13 @@ h2 {
 table tbody tr td td {
   display: flex;
 }
+table tbody tr td:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 132px;
+  flex-wrap: wrap;
+}
 
 .info span {
   height: 100px;
