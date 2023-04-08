@@ -22,5 +22,6 @@ router.post("/editProject/:id",upload, controll.update);
 router.get("/delete/:id", controll.delete);
 router.post("/main", controll.find);
 router.post("/delete", controll.remove);
+router.get("/getData", controll.data);
 
 module.exports = router

@@ -1,5 +1,6 @@
 
 const mysql = require("mysql2");
+const { connect } = require("../routes/projects");
 require("dotenv").config();
 // create pool to connection database
 const pool = mysql.createPool({
@@ -166,3 +167,18 @@ exports.remove = (req, res) => {
     })
   }
   //-------- end find projects -------
+  // get data as json file 
+  exports.data = (req,res) => {
+    pool.getConnection((err,connection) => {
+      if(err) throw err 
+      console.log(`Connected successfully fo database${connection.threadId}`)
+      const sql = "SELECT * FROM projects WHERE status = 'active'"
+      connection.query(sql,(err,rows) => {
+        if(!err) {
+          res.status(200).json(rows)
+        }else{
+          console.log(err)
+        }
+      })
+    })
+  }
