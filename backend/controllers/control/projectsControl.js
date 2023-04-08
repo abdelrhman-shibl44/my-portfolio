@@ -97,7 +97,7 @@ exports.update = (req, res) => {
                 connection.query(sql , [req.params.id],(err,rows)=>{
                   connection.release();
                   if(!err) {
-                    res.render("editProject", {rows , alert: `project ${name} successfuly updated` })
+                    res.render("editProject", {rows, alert: `project ${name} successfuly updated` })
                   }else{
                     console.log(err)
                   }

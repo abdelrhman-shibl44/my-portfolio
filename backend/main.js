@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //-------start server-------
 //--static file from backend file--
 app.use(express.static(path.join(__dirname, "public")));
+// from front-end
+app.use(express.static('../public'));
 //-------template engine-------
 const hbs = exhbs.create({ extname: ".hbs" });
 app.engine("hbs", hbs.engine);
