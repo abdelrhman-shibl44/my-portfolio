@@ -39,15 +39,15 @@ exports.add = (req, res) => {
   name = name.trim();
   link = link.trim();
   description = description.trim();
-  // let imagePath = null;
-  // if (req.file) {
-  //     imagePath = req.file.destination.replace("../public", "") + '/' + req.file.filename;
-  // }
+  let imagePath = null;
+  if (req.file) {
+      imagePath = req.file.filename
+  }
   pool.getConnection((err, connection) => {
       if (err) throw err;
       console.log("connected database" + connection.threadId);
-      const sql = "INSERT INTO projects SET type = ?, name = ?, link = ?, sort_order = ?, description = ?";
-      connection.query(sql, [type, name, link, sort_order, description], (err, result) => {
+      const sql = "INSERT INTO projects SET type = ?, name = ?, img = ?, link = ?, sort_order = ?, description = ?";
+      connection.query(sql, [type, name,imagePath, link, sort_order, description], (err, result) => {
           connection.release();
           if (!err) {
               res.render("addProject", { alert: `project ${name} successfuly added` });
@@ -78,15 +78,16 @@ exports.update = (req, res) => {
   name = name.trim();
   link = link.trim();
   description = description.trim();
-  // let imagePath = null;
-  // if (req.file) {
-  //     imagePath = req.file.destination.replace("../public", "") + '/' + req.file.filename;
-  // }
+  let imagePath = null;
+  if (req.file) {
+      imagePath = req.file.filename
+      console.log(imagePath)
+  }
   pool.getConnection((err, connection) => {
       if (err) throw err;
       console.log("connected database" + connection.threadId);
-      const sql = "UPDATE projects SET type = ?, name = ?, link = ?, sort_order = ?, description = ? WHERE id = ?";
-      connection.query(sql, [type, name, link, sort_order, description, req.params.id], (err, result) => {
+      const sql = "UPDATE projects SET type = ?, name = ?, img = ? , link = ?, sort_order = ?, description = ? WHERE id = ?";
+      connection.query(sql, [type, name,imagePath, link, sort_order, description, req.params.id], (err, result) => {
           connection.release();
           if (!err) {
               pool.getConnection((error, connection) => {
@@ -162,8 +163,6 @@ exports.remove = (req, res) => {
         }
         console.log("data from search\n:" + rows)
       })
-      
-      
     })
   }
   //-------- end find projects -------
