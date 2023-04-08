@@ -15,7 +15,7 @@
         </ol>
       </nav>
       <h1>Add or Delete Projects</h1>
-      <form action="/form" method="POST">
+      <form action="/form" enctype="multipart/form-data" method="POST">
         {{> projectForm}}
         <div class="col-md-12">
           <button type="submit" class="addBtn btn btn-primary mt-2">Add

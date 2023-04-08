@@ -16,7 +16,7 @@
       </nav>
       <h1> Edit Project</h1>
       {{#each rows}}
-      <form action="/editProject/{{this.id}}" method="POST">
+      <form action="/editProject/{{this.id}}" enctype="multipart/form-data" method="POST">
         {{> projectForm}}
         <div class="col-xs-12">
           <button type="submit" class="deleteBtn btn btn-danger mt-2">Update
