@@ -1,44 +1,38 @@
 
 import React, { useEffect, useState } from "react";
 import "./Projects.scss";
+import { fetchData, checkProjectLink } from "../../api"
 import { Container } from "react-bootstrap";
 export const Projects = () => {
-// fake data
-const allprojects = [
-  {
-    id:1,
-    type:'react',
-    img:"images/logo.png",
-    link:"www.react.com",
-    description:"hi this is react",
-    name:"the main react"
-  },
-  {
-    id:2,
-    type:'react',
-    img:"images/logo.png",
-    link:"www.react.com",
-    description:"hi this is react",
-    name:"the main react"
-  },
-  {
-    id:3,
-    type:'react',
-    img:"images/logo.png",
-    link:"www.react.com",
-    description:"hi this is react",
-    name:"the main react"
-  },
-  {
-    id:4,
-    type:'react',
-    img:"images/logo.png",
-    link:"www.react.com",
-    description:"hi this is react",
-    name:"the main react"
+  const [project, setProjects] = useState([]);
+  useEffect(() => {
+    fetchData().then((data) => {
+      // order the projects
+      data.sort((a, b) => a.sort_order - b.sort_order);
+      setProjects(data);
+    })
+
+    // Poll every 10 seconds
+    const intervalId = setInterval(() => {
+      fetchData().then((data) => {
+        // order the projects 
+        data.sort((a, b) => a.sort_order - b.sort_order);
+        setProjects(data);
+      });
+    }, 10000);
+    // Clean up the interval when the component unmounts
+    
+    return () => clearInterval(intervalId);
+  }, [])
+  console.log(project)
+  // when click on button to load project 
+  const loadProject = async (projectLink) => {
+    console.log(projectLink)
+    const isValidLink = await checkProjectLink(projectLink)
+    if(!isValidLink) {
+      console.log("yes")
+    }
   }
-]
-console.log(allprojects)
 
 
   const handleMouseMove = (e) => {
@@ -60,7 +54,7 @@ console.log(allprojects)
   const handleProjectType = (projectType) => {
     setProjectType(projectType)
     // check if image has loaded to prevent click 
-    switch(projectType) {
+    switch (projectType) {
       case "react":
       case "jQuery":
       case 'javascript':
@@ -68,10 +62,10 @@ console.log(allprojects)
       case "html&css":
         break;
       default:
-        break;  
+        break;
     }
   };
-  const ProjectsByFilter = allprojects
+  const ProjectsByFilter = project
     .filter((project) => project.type === ProjectType)
     .map((projects) => (
       <div
@@ -92,6 +86,7 @@ console.log(allprojects)
           </div>
           <button
             className="card__link"
+            onClick={() => loadProject(project.link)}
           >
             Show Project
           </button>
@@ -99,31 +94,31 @@ console.log(allprojects)
       </div>
     ));
 
-    useEffect(() => {
-      const headerSection = document.querySelector(".header-section")
-      const buttons = headerSection.querySelectorAll('button')
-      buttons.forEach((projectType) => {
-        projectType.addEventListener('click',() => {
-          buttons.forEach((button) => {button.classList.remove("active")})
-          projectType.classList.add("active")
-        })
+  useEffect(() => {
+    const headerSection = document.querySelector(".header-section")
+    const buttons = headerSection.querySelectorAll('button')
+    buttons.forEach((projectType) => {
+      projectType.addEventListener('click', () => {
+        buttons.forEach((button) => { button.classList.remove("active") })
+        projectType.classList.add("active")
       })
     })
+  })
 
   return (
     <div className="projectsHolder">
       <Container fluid>
-      <div className="header-section">
-        <button className= {ProjectType === "react" ? "active" : ""} onClick={() => handleProjectType("react")}>React</button>
-        <button className= {ProjectType === "jQuery" ? "active" : ""} onClick={() => handleProjectType("jQuery")}>jQuery</button>
-        <button className= {ProjectType === "javascript"? "active" : ""} onClick={() => handleProjectType("javascript")}>
-          JavaScript
-        </button>
-        <button className={ProjectType ==="bootstrap" ? "active" : ""} onClick={() => handleProjectType("bootstrap")}>bootstrap</button>
-        <button className={ProjectType ==="html&css"  ? "active" : ""} onClick={() => handleProjectType("html&css")}>Html&Css</button>
-      </div>
-      <div className="content-section"> {ProjectsByFilter} </div>
-    </Container>
+        <div className="header-section">
+          <button className={ProjectType === "react" ? "active" : ""} onClick={() => handleProjectType("react")}>React</button>
+          <button className={ProjectType === "jQuery" ? "active" : ""} onClick={() => handleProjectType("jQuery")}>jQuery</button>
+          <button className={ProjectType === "javascript" ? "active" : ""} onClick={() => handleProjectType("javascript")}>
+            JavaScript
+          </button>
+          <button className={ProjectType === "bootstrap" ? "active" : ""} onClick={() => handleProjectType("bootstrap")}>bootstrap</button>
+          <button className={ProjectType === "html&css" ? "active" : ""} onClick={() => handleProjectType("html&css")}>Html&Css</button>
+        </div>
+        <div className="content-section"> {ProjectsByFilter} </div>
+      </Container>
     </div>
   );
 };
