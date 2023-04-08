@@ -7,6 +7,8 @@ router.get("/form", controll.form);
 router.post("/form", controll.add);
 router.get("/editProject/:id", controll.edit);
 router.post("/editProject/:id", controll.update);
+router.get("/delete/:id", controll.delete);
+router.post("/delete", controll.remove);
 
 
 module.exports = router

@@ -110,3 +110,40 @@ exports.update = (req, res) => {
   });
 };
 //-------- end adding project to database -------
+//-------- delete project from database -------
+exports.delete = (req, res) => {
+  pool.getConnection((error, connection) => {
+      if (error) throw error
+      console.log(`connected to database ${connection.threadId}`)
+      const sql = 'UPDATE projects SET status = ? WHERE id = ?'
+      connection.query(sql, ['removed',req.params.id], (err, rows) => {
+        connection.release();
+        if(!err){
+        const removedProject = encodeURIComponent(`${req.query.name} successfully removed`)
+            res.redirect(`/main?removed=${removedProject}`)
+        }else{
+          console.log(err)
+        }
+        console.log("hello i'm the delete one" + rows)
+      })
+  })
+};
+//-------- start remove project from database -------
+exports.remove = (req, res) => {
+  const {id} = req.body
+  pool.getConnection((error, connection) => {
+      if (error) throw error
+      console.log(`connected to database ${connection.threadId}`)
+      const sql = 'DELETE FROM projects WHERE id = ?'
+      connection.query(sql, [id], (err, rows) => {
+        connection.release();
+        if(!err){
+            res.redirect("/main")
+        }else{
+          console.log(err)
+        }
+        console.log("hello i'm the delete one" + rows)
+      })
+    })
+  };
+  //-------- end reomve project from database -------
