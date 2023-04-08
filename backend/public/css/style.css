@@ -59,6 +59,12 @@ h2 {
 
 .table-responsive table td {
   border-bottom: 1px solid #ddd;
+  
+}
+.table-responsive table td:nth-of-type(4) {
+  min-height: 150px;
+  overflow: auto;
+  padding:5px !important;
 }
 
 .table-responsive table tr:nth-child(even) {
@@ -129,6 +135,24 @@ table tbody tr td:last-child {
   min-height: 132px;
   flex-wrap: wrap;
 }
+table td:nth-of-type(4) img{
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+/* div to make overflow if image pass the the max height */
+table td:nth-of-type(4) .imgHolder{
+  height: 122px;
+  width: 150px;
+  overflow: auto;
+}
+table td:nth-of-type(4) .imgHolder::-webkit-scrollbar{
+  width: 1px;
+}
+table td:nth-of-type(4) .imgHolder::-webkit-scrollbar-thumb{
+  background-color: #8a3324;
+}
+
 
 .info span {
   height: 100px;
