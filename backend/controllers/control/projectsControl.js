@@ -1,6 +1,6 @@
 
 const mysql = require("mysql2");
-require("dotenv").config()
+require("dotenv").config();
 // create pool to connection database
 const pool = mysql.createPool({
   connectionLimit: 100,
@@ -147,3 +147,23 @@ exports.remove = (req, res) => {
     })
   };
   //-------- end reomve project from database -------
+  //-------- find projects -------
+  exports.find = (req,res) => {
+    pool.getConnection((err,connection) => {
+      if(err) throw err; 
+      console.log("Connected to database" + connection.threadId)
+      const {search} = req.body
+      const sql = "SELECT * FROM projects WHERE type LIKE ? OR name LIKE ? OR status LIKE ?"
+      connection.query(sql,["%" + search + "%","%" + search + "%","%" + search + "%"],(err,rows) => {
+        if(!err) {
+          res.render("home",{rows});
+        }else{
+          console.log(err);
+        }
+        console.log("data from search\n:" + rows)
+      })
+      
+      
+    })
+  }
+  //-------- end find projects -------
