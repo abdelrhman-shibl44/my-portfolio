@@ -81,6 +81,53 @@
     gap: 25px;
     row-gap: 30px;
   }
+  // start show live projects 
+  .currProjectHolder{
+    .errMessage{
+      position: fixed;
+      top: 50%;
+      left: calc(50% + 70px);//70px from sidebar
+      transform: translate(-50%, -50%);
+      background-color: #d1eeff;
+      width: 20rem;
+      height: 4rem;
+      padding: 10px;
+      line-height: calc(2rem + 10px);
+      color: orangered;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #000; 
+      font-weight: 500;
+      font-size: 18px;
+      text-align: center;
+      z-index: 1;
+      transition: 0.7s;
+      animation:fadeIn 0.8s ease;
+      &.close{
+        opacity: 0;
+        transition: 0.8s;
+        visibility: hidden;
+      }
+      @media (max-width:768px) {
+          left:50% !important
+      }
+      button{
+        all: initial;
+        position: absolute;
+        top: 1px;
+        right: 3px;
+        font-size: 24px;
+        color: orangered;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        
+        &:hover {
+          transform: scale(1.2);
+        }
+      } 
+    }
+  }
 }
 
 // start card holder

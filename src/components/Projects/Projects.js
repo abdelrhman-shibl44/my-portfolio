@@ -3,8 +3,11 @@ import React, { useEffect, useState } from "react";
 import "./Projects.scss";
 import { fetchData, checkProjectLink } from "../../api"
 import { Container } from "react-bootstrap";
+import {AiOutlineCloseCircle} from "react-icons/ai";
 export const Projects = () => {
   const [project, setProjects] = useState([]);
+  const [valid, setValid] = useState(false)
+  const [closeerrMess, setCloseErrMess] = useState(false)
   useEffect(() => {
     fetchData().then((data) => {
       // order the projects
@@ -27,13 +30,18 @@ export const Projects = () => {
   console.log(project)
   // when click on button to load project 
   const loadProject = async (projectLink) => {
-    console.log(projectLink)
     const isValidLink = await checkProjectLink(projectLink)
-    if(!isValidLink) {
-      console.log("yes")
+    setCloseErrMess(false)
+    if(isValidLink) {
+      setCloseErrMess(true)
+      console.log("link is valid")
+    }else{
+      setValid(true)
+      console.log("yes link is not valid ")
+
     }
   }
-
+console.log(valid)
 
   const handleMouseMove = (e) => {
     const { width, height, left, top } =
@@ -50,7 +58,7 @@ export const Projects = () => {
   };
 
   const [ProjectType, setProjectType] = useState("react");
-
+  
   const handleProjectType = (projectType) => {
     setProjectType(projectType)
     // check if image has loaded to prevent click 
@@ -86,7 +94,7 @@ export const Projects = () => {
           </div>
           <button
             className="card__link"
-            onClick={() => loadProject(project.link)}
+            onClick={() => loadProject(projects.link)}
           >
             Show Project
           </button>
@@ -118,6 +126,18 @@ export const Projects = () => {
           <button className={ProjectType === "html&css" ? "active" : ""} onClick={() => handleProjectType("html&css")}>Html&Css</button>
         </div>
         <div className="content-section"> {ProjectsByFilter} </div>
+        <div className="currProjectHolder">
+          {
+          valid && (
+          <div className={`errMessage ${closeerrMess && "close"}`}>
+            The Link is invalid
+            <button onClick={() => setCloseErrMess(true)} >
+              <AiOutlineCloseCircle />
+            </button>
+          </div>
+          )}
+        </div>
+        
       </Container>
     </div>
   );
