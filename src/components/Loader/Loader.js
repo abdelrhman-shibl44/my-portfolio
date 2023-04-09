@@ -1,7 +1,14 @@
 import React from 'react'
+import "./Loader.scss"
 
-export const Loader = () => {
+export const Loader = ({width,height}) => {
   return (
-    <div>Loader</div>
+<div class="loader"
+style={{'--loader-width':`${width}px`,'--loader-height':`${height}px`}}
+>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
   )
 }
