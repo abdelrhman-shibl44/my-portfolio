@@ -6,8 +6,9 @@ import { Container } from "react-bootstrap";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 export const Projects = () => {
   const [project, setProjects] = useState([]);
-  const [valid, setValid] = useState(false)
-  const [closeerrMess, setCloseErrMess] = useState(false)
+  const [valid, setValid] = useState(false);
+  const [closeerrMess, setCloseErrMess] = useState(false);
+  const [showOverlay,setShowOverlay] = useState(false);
   useEffect(() => {
     fetchData().then((data) => {
       // order the projects
@@ -30,6 +31,7 @@ export const Projects = () => {
   console.log(project)
   // when click on button to load project 
   const loadProject = async (projectLink) => {
+    setShowOverlay(true);
     const isValidLink = await checkProjectLink(projectLink)
     setCloseErrMess(false)
     if(isValidLink) {
@@ -114,7 +116,7 @@ console.log(valid)
   })
 
   return (
-    <div className="projectsHolder">
+    <div className={`projectsHolder`}>
       <Container fluid>
         <div className="header-section">
           <button className={ProjectType === "react" ? "active" : ""} onClick={() => handleProjectType("react")}>React</button>
@@ -131,13 +133,16 @@ console.log(valid)
           valid && (
           <div className={`errMessage ${closeerrMess && "close"}`}>
             The Link is invalid
-            <button onClick={() => setCloseErrMess(true)} >
+            <button onClick={() => {setCloseErrMess(true); setShowOverlay(false)}} >
               <AiOutlineCloseCircle />
             </button>
           </div>
           )}
         </div>
-        
+        {
+        showOverlay &&
+        <div className="overlay"></div>
+      } 
       </Container>
     </div>
   );
