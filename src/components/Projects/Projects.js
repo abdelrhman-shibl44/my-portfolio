@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Projects.scss";
 import { fetchData, checkProjectLink } from "../../api"
 import { Container } from "react-bootstrap";
@@ -12,6 +12,9 @@ export const Projects = () => {
   const [showOverlay,setShowOverlay] = useState(false);
   const [loading,setLoading] = useState(false);
   const [showProject,setShowProject] = useState(null);
+  const [ProjectType, setProjectType] = useState("react");
+  const [imagesLoaded,setImagesLoaded] = useState(false);
+
   const handleCloseProject = () =>{
     setShowProject(false)
     setShowOverlay(false)
@@ -68,9 +71,7 @@ console.log(valid)
   const resetRotation = (e) => {
     e.currentTarget.style.transform = "none";
   };
-
-  const [ProjectType, setProjectType] = useState("react");
-  
+  // when click on project type btn 
   const handleProjectType = (projectType) => {
     setProjectType(projectType)
     // check if image has loaded to prevent click
@@ -84,6 +85,9 @@ console.log(valid)
       default:
         break;
     }
+    if(projectType === ProjectType){
+      setImagesLoaded(false);
+    }else setImagesLoaded(true);
   };
   const ProjectsByFilter = project
     .filter((project) => project.type === ProjectType)
@@ -98,11 +102,21 @@ console.log(valid)
           <h2 className="card__title">{projects.name}</h2>
           <p className="card__description">{projects.description}</p>
           <div className="cardImg__Holder">
-            <img
-              className="card__img"
-              src={`images/${projects.img && projects.img}`}
-              alt="img"
-            />
+            {!projects.img && (imagesLoaded ? null : <Loader width={10} height={10} />)}
+            
+            {projects.img && (
+            <>
+            {imagesLoaded && <Loader width={10} height={10}/>}
+              <img
+                className="card__img"
+                src={`images/${projects.img}`}
+                alt="img"
+                style={{ opacity: imagesLoaded ? "0" : "1", transition: "1s" }}
+                onError={(e) => {setTimeout(setImagesLoaded(false),1000); e.target.alt ="images not found"; e.target.src="images/faild-image.png";e.target.parentElement.classList.add("img__Error") }}
+                onLoad={() => setTimeout(setImagesLoaded(false), 1000)}
+              />
+            </>
+            )}
           </div>
           <button
             className="card__link"
