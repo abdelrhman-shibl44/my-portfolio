@@ -1,12 +1,16 @@
 .loader {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   position: absolute;
-  z-index: 10;
-  left: 50%;
-  top: 50%;
+  height: 100vh;
+  z-index:10;
+  left: calc(50% + 60px);
+  top: 0;
   transform: translate(-50%, -50%);
+  @media(max-width:768px) {
+    left:50%
+  }
   .dot {
     width: calc(var(--loader-width) );
     height: calc(var(--loader-height) );
