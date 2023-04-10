@@ -1,14 +1,21 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Projects.scss";
 import { fetchData, checkProjectLink } from "../../api"
 import { Container } from "react-bootstrap";
 import {AiOutlineCloseCircle} from "react-icons/ai";
+import { Loader } from "../Loader/Loader";
 export const Projects = () => {
   const [project, setProjects] = useState([]);
   const [valid, setValid] = useState(false);
   const [closeerrMess, setCloseErrMess] = useState(false);
   const [showOverlay,setShowOverlay] = useState(false);
+  const [loading,setLoading] = useState(false);
+  const [showProject,setShowProject] = useState(null);
+  const handleCloseProject = () =>{
+    setShowProject(false)
+    setShowOverlay(false)
+  }
   useEffect(() => {
     fetchData().then((data) => {
       // order the projects
@@ -25,20 +32,23 @@ export const Projects = () => {
       });
     }, 10000);
     // Clean up the interval when the component unmounts
-    
     return () => clearInterval(intervalId);
   }, [])
   console.log(project)
   // when click on button to load project 
   const loadProject = async (projectLink) => {
     setShowOverlay(true);
+    setLoading(true)
     const isValidLink = await checkProjectLink(projectLink)
     setCloseErrMess(false)
     if(isValidLink) {
       setCloseErrMess(true)
       console.log("link is valid")
+      setLoading(true)
+      setTimeout(() => setShowProject(projectLink),2000)
     }else{
       setValid(true)
+      setLoading(false)
       console.log("yes link is not valid ")
 
     }
@@ -63,7 +73,7 @@ console.log(valid)
   
   const handleProjectType = (projectType) => {
     setProjectType(projectType)
-    // check if image has loaded to prevent click 
+    // check if image has loaded to prevent click
     switch (projectType) {
       case "react":
       case "jQuery":
@@ -90,7 +100,7 @@ console.log(valid)
           <div className="cardImg__Holder">
             <img
               className="card__img"
-              src={projects.img && projects.img}
+              src={`images/${projects.img && projects.img}`}
               alt="img"
             />
           </div>
@@ -114,7 +124,7 @@ console.log(valid)
       })
     })
   })
-
+  
   return (
     <div className={`projectsHolder`}>
       <Container fluid>
@@ -129,19 +139,38 @@ console.log(valid)
         </div>
         <div className="content-section"> {ProjectsByFilter} </div>
         <div className="currProjectHolder">
+        {showProject && (
+          <div className="currentProject">
+            <button className="external__link">
+              <a href = {showProject}>External Link</a>
+            </button>
+            <div onClick={handleCloseProject} className="close-btn">
+                x
+            </div> 
+            <iframe
+              title="projects"
+              src={showProject}
+              width="100%"
+              height="92%"
+              onLoad={() => setLoading(false)}
+            ></iframe>
+          </div>
+        )}
           {
-          valid && (
+            valid && (
           <div className={`errMessage ${closeerrMess && "close"}`}>
             The Link is invalid
-            <button onClick={() => {setCloseErrMess(true); setShowOverlay(false)}} >
+            <button onClick={() => {setCloseErrMess(true); setShowOverlay(false); setLoading(false)}} >
               <AiOutlineCloseCircle />
             </button>
           </div>
           )}
         </div>
+
+        {loading && <Loader width={25} height={25}/>}
         {
-        showOverlay &&
-        <div className="overlay"></div>
+          showOverlay &&
+          <div className="overlay"></div>
       } 
       </Container>
     </div>
