@@ -2,7 +2,7 @@
 
 const fetchData = async () => {
   try {
-    const res = await fetch(`http://localhost:${process.env.PORT | 8080}/getData`)
+    const res = await fetch(`http://localhost:${process.env.PORT | 5050}/getData`)
     const data = res.json()
     return data
   } catch (err) {
