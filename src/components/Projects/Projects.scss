@@ -1,12 +1,12 @@
 // the main Holder of projects
 .projectsHolder {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
   padding: 50px 0;
   transition: all 2s ease;
   // Header sections contains ProjectsType buttons
@@ -83,6 +83,74 @@
   }
   // start show live projects 
   .currProjectHolder{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    .currentProject{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: absolute;
+      width: calc(100% - 145px);
+      height: 100%;
+      right: 0;
+      bottom:0;
+      z-index: 50;
+      
+      // top:70px;
+      @media(max-width:768px) {
+        width: 100%;
+      }
+      .close-btn{
+        color: #fff;
+        font-size: 50px;
+        cursor: pointer;
+        width: 50px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .external__link{
+      all: initial;
+      background-color: lavender;
+      padding: 8px;
+      position: absolute;
+      top:40px;
+      cursor: pointer;
+      left: 0;
+      a{
+        all: initial;
+        color: purple;
+        cursor: pointer;
+      }
+      &::after{
+        content: "";
+        position: absolute;
+        width:20px;
+        height:100%;
+        right: -20px;
+        top:0;
+        bottom:0;
+        border-style: solid;
+        border-width: 17px 17px 17px 9px;
+        border-color: lavender transparent lavender lavender;
+      }
+      &:hover::after{
+        border-color: purple transparent purple purple;
+
+      }
+      &:hover {
+        background-color: purple;
+        
+        a {
+          color: lavender;
+        }
+      }
+    }
+  }
+
     .errMessage{
       position: fixed;
       top: 50%;
