@@ -1,6 +1,5 @@
 
 const mysql = require("mysql2");
-const { connect } = require("../routes/projects");
 require("dotenv").config();
 // create pool to connection database
 const pool = mysql.createPool({
