@@ -106,7 +106,7 @@ console.log(valid)
             
             {projects.img && (
             <>
-            {imagesLoaded && <Loader width={10} height={10}/>}
+            {imagesLoaded && <Loader width={10} height={10} color={"purple"}/>}
               <img
                 className="card__img"
                 src={`images/${projects.img}`}
@@ -180,8 +180,7 @@ console.log(valid)
           </div>
           )}
         </div>
-
-        {loading && <Loader width={25} height={25}/>}
+        {loading && <Loader width={25} height={25} color={"lavender"}/>}
         {
           showOverlay &&
           <div className="overlay"></div>

@@ -16,7 +16,7 @@
     height: calc(var(--loader-height) );
     margin: 0 10px;
     border-radius: 50%;
-    background-color: lavender;
+    background-color: var(--loader-color);
     opacity: 0.4;
     animation: dotAnimate 1s ease-in-out infinite;
     &:nth-child(2) {
