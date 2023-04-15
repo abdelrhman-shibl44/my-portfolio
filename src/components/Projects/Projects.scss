@@ -304,6 +304,7 @@
       height: 250px;
       overflow-y: auto;
       .loader{
+        position: absolute;
         height: 100%;
         left: 50%;
       }
