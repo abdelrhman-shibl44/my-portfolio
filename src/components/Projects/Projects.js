@@ -13,7 +13,7 @@ export const Projects = () => {
   const [loading,setLoading] = useState(false);
   const [showProject,setShowProject] = useState(null);
   const [ProjectType, setProjectType] = useState("react");
-  const [imagesLoaded,setImagesLoaded] = useState(false);
+  const [imagesLoaded,setImagesLoaded] = useState(true);
 
   const handleCloseProject = () =>{
     setShowProject(false)
@@ -37,7 +37,6 @@ export const Projects = () => {
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, [])
-  console.log(project)
   // when click on button to load project 
   const loadProject = async (projectLink) => {
     setShowOverlay(true);
@@ -46,17 +45,13 @@ export const Projects = () => {
     setCloseErrMess(false)
     if(isValidLink) {
       setCloseErrMess(true)
-      console.log("link is valid")
       setLoading(true)
       setTimeout(() => setShowProject(projectLink),2000)
     }else{
       setValid(true)
       setLoading(false)
-      console.log("yes link is not valid ")
-
     }
   }
-console.log(valid)
 
   const handleMouseMove = (e) => {
     const { width, height, left, top } =
@@ -102,8 +97,6 @@ console.log(valid)
           <h2 className="card__title">{projects.name}</h2>
           <p className="card__description">{projects.description}</p>
           <div className="cardImg__Holder">
-            {!projects.img && (imagesLoaded ? null : <Loader width={10} height={10} />)}
-            
             {projects.img && (
             <>
             {imagesLoaded && <Loader width={10} height={10} color={"purple"}/>}
@@ -112,8 +105,12 @@ console.log(valid)
                 src={`images/${projects.img}`}
                 alt="img"
                 style={{ opacity: imagesLoaded ? "0" : "1", transition: "1s" }}
-                onError={(e) => {setTimeout(setImagesLoaded(false),1000); e.target.alt ="images not found"; e.target.src="images/faild-image.png";e.target.parentElement.classList.add("img__Error") }}
-                onLoad={() => setTimeout(setImagesLoaded(false), 1000)}
+                onError={(e) => {setTimeout(setImagesLoaded(false),2000); 
+                  e.target.alt ="images not found";
+                  e.target.src="images/faild-image.png";
+                  e.target.parentElement.classList.add("img__Error") 
+                }}
+                onLoad={() => setTimeout(setImagesLoaded(false),2000)}
               />
             </>
             )}
