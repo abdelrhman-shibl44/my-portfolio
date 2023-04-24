@@ -148,7 +148,7 @@ export const Projects = () => {
           <button className={ProjectType === "bootstrap" ? "active" : ""} onClick={() => handleProjectType("bootstrap")}>bootstrap</button>
           <button className={ProjectType === "html&css" ? "active" : ""} onClick={() => handleProjectType("html&css")}>Html&Css</button>
         </div>
-        <div className="content-section"> {ProjectsByFilter} </div>
+        <div style={{display: showProject && "none"}} className="content-section"> {ProjectsByFilter} </div>
         <div className="currProjectHolder">
         {showProject && (
           <div className="currentProject">
