@@ -280,6 +280,11 @@
       margin: 10px 0;
       word-spacing: normal;
       letter-spacing: normal;
+      @media(max-width:280px) {
+        min-width: 100%;
+        width:100%;
+        font-size: 14px;
+      }
     }
 
     .card__link {
@@ -360,6 +365,10 @@
       }
 
     }
+    // card-content responsive
+    @media(max-width:280px) {
+      padding: 20px 5px 10px 14px;
+    }
   }
 
   // responsive the main Holder
@@ -374,7 +383,7 @@
   }
 
   @media (max-width: 280px) {
-    width: 260px;
+    width: 255px;
     height: 250px;
   }
 }
