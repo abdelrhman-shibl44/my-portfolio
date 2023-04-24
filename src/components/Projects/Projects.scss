@@ -100,7 +100,7 @@
       z-index: 50;
       
       // top:70px;
-      @media(max-width:768px) {
+      @media(max-width:767px) {
         width: 100%;
       }
       .close-btn{
@@ -178,7 +178,7 @@
         visibility: hidden;
       }
       // responsive errMessage
-      @media (max-width:768px) {
+      @media (max-width:767px) {
           left:50% !important
       }
       @media (max-width:280px) {
@@ -350,7 +350,7 @@
         height: 60px;
         border-radius: 50%;
         z-index: -1;
-        @media(max-width:768px) {
+        @media(max-width:767px) {
           width: 55px;
           height: 55px;
           bottom: 45.6px;
