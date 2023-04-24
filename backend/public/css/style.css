@@ -74,7 +74,24 @@ h2 {
 .table-responsive table tr:hover {
   background-color: #ddd;
 }
+  .table-responsive table .description span{
+    min-width: 290px;
+    overflow: auto;
+    padding: 0px 10px 0 0;
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
 
+  .table-responsive table .description span::-webkit-scrollbar{
+    width: 2px;
+  }
+  .table-responsive table .description span::-webkit-scrollbar-thumb{
+    border-radius: 30px;
+    background-color: #8a3324;
+  }
 /* auth style  */
 .form-group {
   margin-bottom: 1rem;
