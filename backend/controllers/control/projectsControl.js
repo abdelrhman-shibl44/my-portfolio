@@ -9,12 +9,14 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASS
 });
+
+
 // render home page
 exports.home = (req, res) => {
-  pool.getConnection((err, connection) => {
-    if (err) throw err //not connected
-    console.log("connected to database from view:" + connection.threadId);
-    // user the connection 
+    pool.getConnection((err, connection) => {
+      if (err) throw err //not connected
+      console.log("connected to database from view:" + connection.threadId);
+      // user the connection 
     connection.query('SELECT * FROM projects WHERE status = "active"', (err, rows) => {
       // when done with connection realse it 
       connection.release();
@@ -26,6 +28,8 @@ exports.home = (req, res) => {
     });
   });
 }
+
+
 // render addProjectForm 
 exports.form = (req,res) => {
   res.render("addProject")
@@ -121,7 +125,7 @@ exports.delete = (req, res) => {
         connection.release();
         if(!err){
         const removedProject = encodeURIComponent(`${req.query.name} successfully removed`)
-            res.redirect(`/main?removed=${removedProject}`)
+            res.redirect(`/?removed=${removedProject}`)
         }else{
           console.log(err)
         }
@@ -139,7 +143,7 @@ exports.remove = (req, res) => {
       connection.query(sql, [id], (err, rows) => {
         connection.release();
         if(!err){
-            res.redirect("/main")
+            res.redirect("/")
         }else{
           console.log(err)
         }
