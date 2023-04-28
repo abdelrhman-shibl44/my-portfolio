@@ -1,7 +1,14 @@
-/** @format */
-
 $primary-color: #7b97ff; /* lavender blue */
 $secondary-color: #b6c9e6; /* pastel blue */
 $accent-color: #0c2340;
 $light-color: #f8f8f8; /* off-white */
 $btn-color: #f5deb3;
+:export{
+primaryColor: #7b97ff; /* lavender blue */
+secondaryColor: #b6c9e6; /* pastel blue */
+accentColor: #0c2340;
+lightColor: #f8f8f8; /* off-white */
+btnColor: #f5deb3;
+lavenderColor: lavender;
+purpleColor: purple;
+}
