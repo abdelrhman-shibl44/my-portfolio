@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import "./Projects.scss";
+import variables from "../../variables.scss"
 import { fetchData, checkProjectLink } from "../../api"
 import { Container } from "react-bootstrap";
 import {AiOutlineCloseCircle} from "react-icons/ai";
@@ -99,7 +100,7 @@ export const Projects = () => {
           <div className="cardImg__Holder">
             {projects.img && (
             <>
-            {imagesLoaded && <Loader width={10} height={10} color={"purple"}/>}
+            {imagesLoaded && <Loader width={10} height={10} color= {variables.purpleColor}/>}
               <img
                 className="card__img"
                 src={`images/${projects.img}`}
@@ -177,7 +178,7 @@ export const Projects = () => {
           </div>
           )}
         </div>
-        {loading && <Loader width={25} height={25} color={"lavender"}/>}
+        {loading && <Loader width={25} height={25} color={variables.lavenderColor}/>}
         {
           showOverlay &&
           <div className="overlay"></div>
