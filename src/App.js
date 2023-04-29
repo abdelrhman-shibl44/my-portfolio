@@ -14,7 +14,7 @@ function App() {
       <Sidebar />
       {/* end the animation after exit */}
       <AnimatePresence mode='wait'>
-        <motion.div key={location.pathname}
+        <motion.div className='motionDiv' key={location.pathname}
           inital={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} >
           <Routes location={location}>
             <Route path="/" element={<Home />} />
