@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const controll = require('../control/projectsControl')
 const controlRoutes = require('../control/loginControl')
+const controlEamil = require('../control/emailControl')
 //require build username and password 
 require("../control/userControl")
 // use this middleware to upload images 
@@ -45,5 +46,7 @@ router.get("/getData", controll.data);
 router.get("/login", controlRoutes.login);
 router.post("/login" ,controlRoutes.loginPost);
 router.get("/auth/logout",isAuthenticated ,controlRoutes.logout);
+//control client info
+router.post("/api/send-email", controlEamil.email);
 
 module.exports = router
