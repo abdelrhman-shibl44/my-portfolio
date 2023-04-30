@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { disableRightClick, AnimatedLetters } from "../utilities/utils"
 import "./Home.scss"
 import { useStars } from '../../assests/startsCanvas';
-console.log(useStars)
 
 export const Home = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
@@ -15,10 +14,6 @@ export const Home = () => {
   const jobArray = ["w", "e", "b", " ", "D", "e", "v", "e", "l", "o", "p", "e", "r"];
   // const canvasRef = useRef(null);
   const canvasRef = useStars();
- 
-  
- 
-
     return (
         <div className='HomeHolder'>
                 <canvas ref={canvasRef}  width={window.innerWidth} height={window.innerHeight} id="star-canvas"></canvas>
