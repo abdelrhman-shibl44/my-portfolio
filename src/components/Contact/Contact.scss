@@ -1,11 +1,49 @@
 @import "../../variables.scss";
 .Contact{
-  overflow: hidden;
-  .motionDiv{
-    width: 50%;
+  .contact-section{
+    height:calc(100vh - 170px );
+    gap: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    @media(max-width:1024px) {
+      height: 600px;
+
+    }
+    @media(max-width:992px) {
+      flex-direction: column-reverse;
+      min-height: calc(100vh + 50px);
+      margin-bottom: 30px;
+      width: 100%;
+      gap: 0;
+      row-gap: 10px;
+    }
+    @media(max-width:767px) {
+    }
+    .motionDiv{
+      width: 60%;
+      height: 100%;
+      @media(max-width:992px) {
+        width: 100%;
+      }
+    }
+    .motion_map{
+      width: 40%;
+      height:100%;
+      @media(max-width:992px) {
+        width: 80%;
+        
+      }
+      #map { height: 100%;width: 100%; }
+      .leaflet-container{
+        width:100%;
+        height: 100%;
+        border-radius: 8px;
+      }
+    }
   }
-  .contact-section {
+  .contact-form {
     width: 100%;
+    height: 100%;
     background-color: $lavenderColor;
     padding: 40px;
     border-radius: 10px;
@@ -32,7 +70,13 @@
       display: flex;
       flex-direction: column;
       text-align: left;
+      justify-content: space-between;
+      height: 80%;
 
+      .err{
+        text-align: right;
+        color:purple
+      }
       label {
         font-size: 18px;
         font-weight: bold;
@@ -51,6 +95,7 @@
         font-size: 16px;
         font-family: inherit;
         background-color: #FFFFFF;
+        width: 100%;
         &::placeholder{
           transition: 0.2s ease-out;
         }
