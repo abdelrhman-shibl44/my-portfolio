@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const hbs= require("nodemailer-express-handlebars");
 require("dotenv").config();
 exports.email = async(req,res) => {
   try {
@@ -12,17 +13,43 @@ exports.email = async(req,res) => {
         pass:process.env.Pass,
       }
     });
+    // use template by handlebars
+    transporter.use(
+      "compile",
+      hbs({
+        viewEngine: {
+          extName: ".hbs",
+          partialsDir: "./views/partials",
+          layoutsDir: "./views/layouts",
+          defaultLayout: "",
+        },
+        viewPath: "./views",
+        extName: ".hbs",
+      })
+    );
+
     // send the email 
     let info = await transporter.sendMail({
-      from:`"${name}" <${email}>`,
+      // from:email,
+      sender: `${name} <${email}>`,
       to:"abdulrhman.mahmoud44@gmail.com",
-      subject:"New messgae from your portfolio",
-      text:message,
+      subject:`(Portfolio)New messgae from ${name}`,
+
+      // html:html,
+      template:"email",
+      context: {
+        name: name,
+        email:email,
+        message: message,
+      },
+      replyTo: email,
+      // template:"home"
     });
     console.log("Message sent: %s",info.messageId)
-    res.send("Email sent successfull!")
+    res.status(200).json({ status: "success", message: "Email sent successfully!" });
+
   }catch(err){
     console.log(err)
-    res.status(500).send("Error sending email")
+    res.status(500).json({ status: "error", message: "Error sending email" });
   }
 }
