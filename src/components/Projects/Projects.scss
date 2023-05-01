@@ -1,5 +1,7 @@
+@import "animate.css";
 // the main Holder of projects
 .projectsHolder {
+  animation: fadeIn 2s;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

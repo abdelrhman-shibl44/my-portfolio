@@ -1,6 +1,8 @@
 @import "../../variables.scss";
+@import "animate.css";
 .Contact{
   .contact-section{
+    animation: fadeIn 2s;
     height:calc(100vh - 170px );
     gap: 10px;
     overflow: hidden;

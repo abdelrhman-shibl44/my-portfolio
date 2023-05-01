@@ -1,4 +1,6 @@
+@import "animate.css";
 .skills .tecnologies{
+  animation:fadeIn 2s;
   min-height: calc(100vh - 150px);
   transition: 0.5s ease;
   .canvas{
