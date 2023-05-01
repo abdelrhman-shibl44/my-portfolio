@@ -31,10 +31,11 @@ const Ball = (props) => {
     </Float>
   )
 }
-const BallCanvas = ({icon}) =>{
+const BallCanvas = React.memo(({icon}) => {
   return (
     <Canvas style={{width:'250px'}} className='canvas'
       frameloop="always"
+      shadows={false}
       gl={{preserveDrawingBuffer:true}}
     >
       <Suspense fallback={<Html><Loader width={20} height={20} color={variables.lavender}/></Html>}>
@@ -44,5 +45,5 @@ const BallCanvas = ({icon}) =>{
       <Preload all/>
     </Canvas>
   )
-}
+})
 export default BallCanvas
