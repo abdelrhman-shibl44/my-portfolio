@@ -8,6 +8,8 @@ import skillsData from '../../assests/skillsData/skillsData';
 export let Skills = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
   const nameArray = ["M","y","","S","k","i","l","l","s"]
+  const isMobile = /Mobi/i.test(window.navigator.userAgent);
+  const ballCount = isMobile ? 8 : 11;
   useEffect(()=> {
     setTimeout(() => {
       setLetterClass("text-animate-hover")
@@ -25,10 +27,12 @@ export let Skills = () => {
           />
       </h2>
       <div      
-      className='tecnologies d-flex justify-content-center flex-wrap align-items-center gap-50'>
+      className='tecnologies d-flex justify-content-center flex-wrap align-items-center'>
         {
-          skillsData.map((skills) => (
-            <BallCanvas key={skills.id} icon={skills.icon}/>
+          skillsData.slice(0,ballCount).map((skills) => (
+            <div className='skills-container' key={skills.name}>
+              <BallCanvas  mobile={isMobile} icon={skills.icon}/>
+            </div>
           ))
         }
       </div>

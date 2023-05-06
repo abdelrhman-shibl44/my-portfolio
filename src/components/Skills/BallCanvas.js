@@ -1,7 +1,5 @@
 import React, { Suspense } from 'react'
 import {Canvas} from "@react-three/fiber"
-import { Loader } from "../Loader/Loader";
-import { Html } from '@react-three/drei';
 import variables from "../../variables.scss"
 import {Decal,Float,OrbitControls,Preload,useTexture} from '@react-three/drei'
 
@@ -13,7 +11,7 @@ const Ball = (props) => {
       <ambientLight intensity={0.25}/>
       <directionalLight position={[0,0,0.05]}/>
       <mesh castShadow receiveShadow scale={2.5} >
-        <icosahedronGeometry args={[1,1]}/>
+        <icosahedronGeometry args={[1,2,2]}/>
         <meshStandardMaterial
           color ={variables.lavenderColor}
           polygonOffset
@@ -35,14 +33,22 @@ const BallCanvas = React.memo(({icon}) => {
   return (
     <Canvas style={{width:'250px'}} className='canvas'
       frameloop="always"
-      shadows={false}
-      gl={{preserveDrawingBuffer:true}}
+      gl={{
+        powerPreference: "low-power",
+        antialias: false,
+        stencil: false,
+        depth: false,
+      }}
     >
-      <Suspense fallback={<Html><Loader width={20} height={20} color={variables.lavender}/></Html>}>
-        <OrbitControls enableZoom = {false}/>
+      <Suspense fallback={null}>
+      <OrbitControls
+        enableRotate={true}
+        enableZoom={false}
+        enablePan={false}
+      />
         <Ball imgUrl={icon}/>
       </Suspense>
-      <Preload all/>
+        <Preload all/>
     </Canvas>
   )
 })
